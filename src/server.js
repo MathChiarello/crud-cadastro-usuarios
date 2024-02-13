@@ -1,4 +1,11 @@
 const app = require('./app');
-// const connection = require('mysql2/promise');
+const conn = require('./db/connection');
 
-app.listen(3001, () => console.log('server running on port 3001'));
+const PORT = 3001;
+
+app.listen(PORT, async () => {
+  console.log(`Aplicação está sendo executada na porta ${PORT}`);
+
+  const [result] = await conn.execute('SELECT 1');
+  if (result) console.log('MySQL connection OK');
+});
